@@ -5,9 +5,9 @@
   <groupId>com.github.jmlb23</groupId>
   <artifactId>blog</artifactId>
   <version>0.1</version>
-  <packaging>${packaging}</packaging>
+  <packaging>pom</packaging>
 
-  <parent>
+    <parent>
     <groupId>io.micronaut.platform</groupId>
     <artifactId>micronaut-parent</artifactId>
     <version>4.10.7</version>
@@ -135,6 +135,12 @@
       <groupId>io.mockk</groupId>
       <artifactId>mockk</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.jmlb23</groupId>
+      <artifactId>products</artifactId>
+      <version>0.1</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <build>
@@ -330,5 +336,7 @@
       </plugin>
     </plugins>
   </build>
-
+  <modules>
+    <module>products</module>
+  </modules>
 </project>
