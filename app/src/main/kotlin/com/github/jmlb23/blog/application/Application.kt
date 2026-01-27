@@ -1,4 +1,4 @@
-package com.github.jmlb23
+package com.github.jmlb23.blog.application
 
 import io.micronaut.runtime.Micronaut
 import io.micronaut.runtime.Micronaut.run
