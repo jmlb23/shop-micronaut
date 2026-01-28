@@ -13,9 +13,10 @@ import io.micronaut.http.annotation.Produces
 import io.micronaut.http.annotation.Status
 import java.util.UUID
 import java.util.Date
+import jakarta.inject.Inject
 
 @Controller("/product")
-class ProductController {
+class ProductController(){
 
     @Get("/") 
     @Produces(MediaType.APPLICATION_JSON) 

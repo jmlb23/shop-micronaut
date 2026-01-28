@@ -13,6 +13,7 @@ version = "0.1"
 val kotlinVersion=project.properties.get("kotlinVersion")
 
 dependencies {
+    implementation(project(":core"))
     ksp("io.micronaut:micronaut-http-validation")
     ksp("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
