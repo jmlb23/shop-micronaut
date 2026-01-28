@@ -5,7 +5,6 @@ plugins {
     id("io.micronaut.library") version "4.6.1"
     id("com.gradleup.shadow") version "8.3.9"
     id("io.micronaut.aot") version "4.6.1"
-
 }
 
 
@@ -25,7 +24,6 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
 }
 
 java {
@@ -57,5 +55,4 @@ micronaut {
         optimizeNetty = true
         replaceLogbackXml = true
     }
-
 }
