@@ -1,5 +1,5 @@
 package com.github.jmlb23.product.domain
 
 interface ProductRepository {
-    fun get(id: String): 
+    fun get(id: String): Product
 }

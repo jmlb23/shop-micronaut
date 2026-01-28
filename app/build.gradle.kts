@@ -14,6 +14,7 @@ version = "0.1"
 val kotlinVersion=project.properties.get("kotlinVersion")
 
 dependencies {
+    implementation(project(":products"))
     ksp("io.micronaut:micronaut-http-validation")
     ksp("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -25,7 +26,6 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
 }
 
 application {
