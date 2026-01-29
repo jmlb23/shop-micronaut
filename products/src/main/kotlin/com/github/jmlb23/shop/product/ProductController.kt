@@ -1,6 +1,6 @@
-package com.github.jmlb23.product
+package com.github.jmlb23.shop.product
 
-import com.github.jmlb23.product.dto.*
+import com.github.jmlb23.shop.product.api.*
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType

@@ -1,4 +1,4 @@
-package com.github.jmlb23.product.dto
+package com.github.jmlb23.shop.product.api
 
 import io.micronaut.serde.annotation.Serdeable
 import java.util.Date

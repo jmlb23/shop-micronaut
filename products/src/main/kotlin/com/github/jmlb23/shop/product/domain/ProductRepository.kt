@@ -1,4 +1,4 @@
-package com.github.jmlb23.product.domain
+package com.github.jmlb23.shop.product.domain
 
 interface ProductRepository {
     fun get(id: String): Product
