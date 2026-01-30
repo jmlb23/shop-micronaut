@@ -1,9 +1,12 @@
 package com.github.jmlb23.shop.product.domain
 
+import java.util.UUID
+import java.util.Date
+
 data class Product(
-    val id: String,
+    val id: UUID,
     val name: String,
-    val descriptio: String,
-    val createdAt: String,
-    val price: Double
+    val description: String,
+    val price: Double,
+    val createdAt: Date,
 )

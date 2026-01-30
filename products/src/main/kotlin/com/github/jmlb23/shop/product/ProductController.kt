@@ -1,8 +1,13 @@
 package com.github.jmlb23.shop.product
 
+import com.github.jmlb23.shop.Service
 import com.github.jmlb23.shop.product.api.*
-import io.micronaut.http.HttpStatus
+import com.github.jmlb23.shop.product.domain.Product
+import com.github.jmlb23.shop.product.domain.ProductError
+import com.github.jmlb23.shop.product.api.toDTO
+import com.github.jmlb23.shop.product.api.ProductDTO
 import io.micronaut.http.HttpResponse
+import io.micronaut.http.HttpStatus
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Consumes
@@ -11,16 +16,29 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Produces
 import io.micronaut.http.annotation.Status
-import java.util.UUID
-import java.util.Date
 import jakarta.inject.Inject
+import java.util.Date
+import java.util.UUID
 
 @Controller("/product")
-class ProductController(){
+class ProductController(@Inject val createProductService: Service<String, ProductError, Product>) {
 
-    @Get("/") 
-    @Produces(MediaType.APPLICATION_JSON) 
-    fun index() = mapOf("hola" to "mundo")
+    @Get("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun index(): HttpResponse<Map<String, String>> {
+        return HttpResponse.ok(mapOf("hola" to "mundo"))
+    }
+
+    @Get("/{id}")
+    suspend fun getProductBy(id: String): HttpResponse<ProductDTO> {
+        return createProductService
+                .execute(id)
+                .fold({
+                    HttpResponse.badRequest()
+                }, {
+                    HttpResponse.ok(it.toDTO())
+                }) 
+    }
 
     @Post("/")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -28,13 +46,14 @@ class ProductController(){
     @Status(HttpStatus.CREATED)
     fun addProducts(@Body prod: CreateProduct): HttpResponse<CreatedProductResponse> {
         return HttpResponse.ok(
-            CreatedProductResponse(
-                UUID.randomUUID().toString(), 
-                prod.name, 
-                prod.description, 
-                prod.price,
-                Date()
-            )
-        ).header("location", "/product/${UUID.randomUUID().toString()}")
+                        CreatedProductResponse(
+                                UUID.randomUUID().toString(),
+                                prod.name,
+                                prod.description,
+                                prod.price,
+                                Date()
+                        )
+                )
+                .header("location", "/product/${UUID.randomUUID().toString()}")
     }
 }
