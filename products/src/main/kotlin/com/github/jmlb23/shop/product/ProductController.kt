@@ -21,7 +21,7 @@ import java.util.Date
 import java.util.UUID
 
 @Controller("/product")
-class ProductController(@Inject val createProductService: Service<String, ProductError, Product>) {
+class ProductController(@Inject val createProductService: Service<String, ProductError, ProductResponse>) {
 
     @Get("/")
     @Produces(MediaType.APPLICATION_JSON)
@@ -30,13 +30,13 @@ class ProductController(@Inject val createProductService: Service<String, Produc
     }
 
     @Get("/{id}")
-    suspend fun getProductBy(id: String): HttpResponse<ProductDTO> {
+    suspend fun getProductBy(id: String): HttpResponse<ProductResponse> {
         return createProductService
                 .execute(id)
                 .fold({
                     HttpResponse.badRequest()
                 }, {
-                    HttpResponse.ok(it.toDTO())
+                    HttpResponse.ok(it)
                 }) 
     }
 

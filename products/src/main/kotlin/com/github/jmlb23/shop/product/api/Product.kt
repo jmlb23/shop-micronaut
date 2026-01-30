@@ -20,13 +20,3 @@ data class CreatedProductResponse(
     val created: Date
 )
 
-@Serdeable
-data class ProductDTO(
-    val id: String,
-    val name: String,
-    val description: String,
-    val price: Double,
-    val created: Date
-)
-
-fun Product.toDTO() = ProductDTO(id.toString(), name, description, price, createdAt)
