@@ -4,8 +4,6 @@ import com.github.jmlb23.shop.Service
 import com.github.jmlb23.shop.product.api.*
 import com.github.jmlb23.shop.product.domain.Product
 import com.github.jmlb23.shop.product.domain.ProductError
-import com.github.jmlb23.shop.product.api.toDTO
-import com.github.jmlb23.shop.product.api.ProductDTO
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.MediaType
