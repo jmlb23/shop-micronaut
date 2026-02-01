@@ -12,4 +12,4 @@ plugins {
 }
 
 rootProject.name = "blog"
-include("app", "products", "core")
+include("app", "products", "core", "auth")

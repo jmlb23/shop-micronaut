@@ -26,6 +26,11 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    implementation("io.micronaut.security:micronaut-security-jwt")
+    aotPlugins(platform("io.micronaut.platform:micronaut-platform:4.10.7"))
+    aotPlugins("io.micronaut.security:micronaut-security-aot")
 }
 
 java {
