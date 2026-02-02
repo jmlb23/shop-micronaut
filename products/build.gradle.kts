@@ -47,7 +47,7 @@ micronaut {
     testRuntime("junit5")
     processing {
         incremental(true)
-        annotations("com.github.jmlb23.blog.*")
+        annotations("com.github.jmlb23.shop.*")
     }
     aot {
         // Please review carefully the optimizations enabled below
