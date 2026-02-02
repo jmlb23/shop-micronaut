@@ -13,10 +13,16 @@ import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Produces
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
+import io.micronaut.security.token.generator.TokenGenerator
+import io.micronaut.security.authentication.Authentication
 import jakarta.inject.Inject
+import java.time.Instant
 
 @Controller("/user")
-class AuthController(@Inject val userService: Service<Request, AuthDomainError, String>) {
+class AuthController(
+    @Inject val userService: Service<Request, AuthDomainError, String>,
+    @Inject val tokenGenerator: TokenGenerator
+) {
 
     @Secured(SecurityRule.IS_ANONYMOUS)
     @Post("/login")
@@ -24,12 +30,25 @@ class AuthController(@Inject val userService: Service<Request, AuthDomainError, 
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun login(@Body request: Request): HttpResponse<Response> {
         return userService
-                .execute(request)
-                .fold({ 
+            .execute(request)
+            .fold(
+                {
                     when (it) {
                         AuthDomainError.CredentialsError -> HttpResponse.unauthorized()
                         else -> HttpResponse.notFound()
                     }
-                }, { HttpResponse.ok(Response(it)) })
+                },
+                {
+                    HttpResponse.ok(
+                        Response(
+                            tokenGenerator
+                                .generateToken(Authentication.build(request.username), 15)
+                                .orElseThrow()
+                                .toString()
+                        )
+                    )
+                }
+            )
     }
 }
+
