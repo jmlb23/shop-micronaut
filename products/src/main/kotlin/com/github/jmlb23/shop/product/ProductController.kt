@@ -24,6 +24,7 @@ import java.util.UUID
 @Controller("/product")
 class ProductController(@Inject val createProductService: Service<String, ProductError, ProductResponse>) {
 
+    @Secured(SecurityRule.IS_ANONYMOUS)
     @Get("/")
     @Produces(MediaType.APPLICATION_JSON)
     fun index(): HttpResponse<Map<String, String>> {
