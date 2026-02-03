@@ -17,6 +17,7 @@ import io.micronaut.security.token.generator.TokenGenerator
 import io.micronaut.security.authentication.Authentication
 import jakarta.inject.Inject
 import java.time.Instant
+import java.time.Duration
 
 @Controller("/user")
 class AuthController(
@@ -42,7 +43,10 @@ class AuthController(
                     HttpResponse.ok(
                         Response(
                             tokenGenerator
-                                .generateToken(Authentication.build(request.username), 15)
+                                .generateToken(
+                                    Authentication.build(request.username),
+                                    Duration.ofMinutes(15).toSeconds().toInt()
+                                )
                                 .orElseThrow()
                                 .toString()
                         )
