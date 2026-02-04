@@ -13,7 +13,7 @@ out/
 .settings
 .classpath
 .factorypath
-
+kls_database.db
 # Ignore Gradle build output directory
 build
 
