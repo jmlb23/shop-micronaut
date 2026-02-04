@@ -10,7 +10,7 @@ import java.util.UUID
 
 @Singleton
 class InMemoryProductRepositoryImp : ProductRepository {
-    override suspend fun get(id: String): Either<ProductError, Product> {
-        return Either.Right(Product(UUID.fromString(id), "Example", "a description", 2.3, Date()))
+    override suspend fun get(id: UUID): Either<ProductError, Product> {
+        return Either.Right(Product(id, "Example", "a description", 2.3, Date()))
     }
 }

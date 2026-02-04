@@ -22,7 +22,7 @@ import java.util.UUID
 
 @Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/product")
-class ProductController(@Inject val createProductService: Service<String, ProductError, ProductResponse>) {
+class ProductController(@Inject val createProductService: Service<UUID, ProductError, ProductResponse>) {
 
     @Secured(SecurityRule.IS_ANONYMOUS)
     @Get("/")
@@ -32,7 +32,7 @@ class ProductController(@Inject val createProductService: Service<String, Produc
     }
 
     @Get("/{id}")
-    suspend fun getProductBy(id: String): HttpResponse<ProductResponse> {
+    suspend fun getProductBy(id: UUID): HttpResponse<ProductResponse> {
         return createProductService
                 .execute(id)
                 .fold({

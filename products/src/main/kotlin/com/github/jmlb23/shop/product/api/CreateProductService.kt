@@ -9,10 +9,11 @@ import io.micronaut.serde.annotation.Serdeable
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import java.util.Date
+import java.util.UUID
 
 @Serdeable
 data class ProductResponse(
-        val id: String,
+        val id: UUID,
         val name: String,
         val description: String,
         val price: Double,
@@ -21,11 +22,11 @@ data class ProductResponse(
 
 @Singleton
 class CreateProductService(@Inject val repository: ProductRepository) :
-        Service<String, ProductError, ProductResponse> {
-    fun Product.toDTO() = ProductResponse(id.toString(), name, description, price, createdAt)
+        Service<UUID, ProductError, ProductResponse> {
+    fun Product.toDTO() = ProductResponse(id, name, description, price, createdAt)
 
     override suspend fun execute(
-            param: String
+            param: UUID
     ): Either<ProductError, ProductResponse> {
         return repository.get(param).map { it.toDTO() }
     }
