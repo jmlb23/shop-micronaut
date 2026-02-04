@@ -1,4 +1,6 @@
 package com.github.jmlb23.shop.product.domain
 
 
-sealed class ProductError {}
+sealed class ProductError {
+    data object NotFoundError: ProductError()
+}

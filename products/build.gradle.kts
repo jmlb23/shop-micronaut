@@ -27,6 +27,10 @@ dependencies {
     testImplementation("io.micronaut:micronaut-http-client")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     
+    ksp("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-hibernate-reactive")
+    implementation("io.vertx:vertx-pg-client")
+
     annotationProcessor("io.micronaut.security:micronaut-security-annotations")
     implementation("io.micronaut.security:micronaut-security-jwt")
     aotPlugins(platform("io.micronaut.platform:micronaut-platform:4.10.7"))
