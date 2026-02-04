@@ -12,14 +12,7 @@ import java.util.Date
 import java.util.UUID
 
 @Serdeable
-data class CreateProduct(
-    val name: String,
-    val description: String,
-    val price: Double
-)
-
-@Serdeable
-data class CreatedProductResponse(
+data class GetProductByIdResponse(
     val id: UUID,
     val name: String,
     val description: String,
@@ -28,13 +21,13 @@ data class CreatedProductResponse(
 )
 
 @Singleton
-class CreateProductService(@Inject val repository: ProductRepository) :
-        Service<UUID, ProductError, CreatedProductResponse> {
-    fun Product.toDTO() = CreatedProductResponse(id, name, description, price, createdAt)
+class GetProductByIdService(@Inject val repository: ProductRepository) :
+        Service<UUID, ProductError, GetProductByIdResponse> {
+    fun Product.toDTO() = GetProductByIdResponse(id, name, description, price, createdAt)
 
     override suspend fun execute(
             param: UUID
-    ): Either<ProductError, CreatedProductResponse> {
+    ): Either<ProductError, GetProductByIdResponse> {
         return repository.get(param).map { it.toDTO() }
     }
 }

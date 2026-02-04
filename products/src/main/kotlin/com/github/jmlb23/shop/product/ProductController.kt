@@ -22,18 +22,27 @@ import java.util.UUID
 
 @Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/product")
-class ProductController(@Inject val createProductService: Service<UUID, ProductError, CreatedProductResponse>) {
+class ProductController(
+    @Inject val getProductByIdService: Service<UUID, ProductError, GetProductByIdResponse>,
+    @Inject val getAllProductsService: Service<Unit, ProductError, List<ProductDTO>>,
+) {
 
     @Secured(SecurityRule.IS_ANONYMOUS)
     @Get("/")
     @Produces(MediaType.APPLICATION_JSON)
-    fun index(): HttpResponse<Map<String, String>> {
-        return HttpResponse.ok(mapOf("hola" to "mundo"))
+    suspend fun index(): HttpResponse<List<ProductDTO>> {
+        return getAllProductsService
+                .execute(Unit)
+                .fold({
+                    HttpResponse.serverError()
+                },{
+                    HttpResponse.ok(it)
+                })
     }
 
     @Get("/{id}")
-    suspend fun getProductBy(id: UUID): HttpResponse<CreatedProductResponse> {
-        return createProductService
+    suspend fun getProductBy(id: UUID): HttpResponse<GetProductByIdResponse> {
+        return getProductByIdService
                 .execute(id)
                 .fold({
                     HttpResponse.badRequest()
@@ -46,16 +55,7 @@ class ProductController(@Inject val createProductService: Service<UUID, ProductE
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Status(HttpStatus.CREATED)
-    fun addProducts(@Body prod: CreateProduct): HttpResponse<CreatedProductResponse> {
-        return HttpResponse.ok(
-                        CreatedProductResponse(
-                                UUID.randomUUID(),
-                                prod.name,
-                                prod.description,
-                                prod.price,
-                                Date()
-                        )
-                )
-                .header("location", "/product/${UUID.randomUUID().toString()}")
+    fun addProducts(@Body prod: Any): HttpResponse<Any> {
+        TODO()
     }
 }
