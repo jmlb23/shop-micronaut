@@ -6,4 +6,5 @@ import java.util.UUID
 interface ProductRepository {
     suspend fun get(id: UUID): Either<ProductError,Product>
     suspend fun all(): Either<ProductError, List<Product>>
+    suspend fun add(product: Product): Either<ProductError, UUID>
 }

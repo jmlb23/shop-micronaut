@@ -25,6 +25,7 @@ import java.util.UUID
 class ProductController(
     @Inject val getProductByIdService: Service<UUID, ProductError, GetProductByIdResponse>,
     @Inject val getAllProductsService: Service<Unit, ProductError, List<ProductDTO>>,
+    @Inject val addProduct: Service<CreateProductDTO, ProductError, UUID>,
 ) {
 
     @Secured(SecurityRule.IS_ANONYMOUS)
@@ -55,7 +56,13 @@ class ProductController(
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Status(HttpStatus.CREATED)
-    fun addProducts(@Body prod: Any): HttpResponse<Any> {
-        TODO()
+    suspend fun addProducts(@Body prod: CreateProductDTO): HttpResponse<Any> {
+        return addProduct
+                .execute(prod)
+                .fold({
+                    HttpResponse.unprocessableEntity()
+                }, {
+                    HttpResponse.ok(it)
+                }) 
     }
 }

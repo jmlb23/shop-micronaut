@@ -7,6 +7,9 @@ import com.github.jmlb23.shop.product.domain.ProductRepository
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.repository.kotlin.CoroutineCrudRepository
 import java.util.*
+import java.sql.Timestamp
+import java.time.LocalDateTime
+import java.time.ZoneId
 import kotlinx.coroutines.flow.toList
 import kotlin.runCatching
 
@@ -30,5 +33,23 @@ interface ProductRepositoryImp :
                 }
             )
         } ?: Either.fromLeft(ProductError.NotFoundError)
+    }
+
+    override suspend fun add(product: Product): Either<ProductError, UUID> {
+        return runCatching {
+            save(
+                JPAProduct(
+                product.id,
+                product.name,
+                product.description,
+                product.price,
+                Timestamp.valueOf(
+                    LocalDateTime.ofInstant(product.createdAt.toInstant(), ZoneId.systemDefault())
+                )
+                )
+            )
+        }.getOrNull()?.let { 
+            Either.fromRight(it.id)
+        } ?: Either.fromLeft(ProductError.CreationError)
     }
 }

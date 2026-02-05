@@ -20,4 +20,7 @@ class InMemoryProductRepositoryImp : ProductRepository {
             )
         )
     }
+    override suspend fun add(product: Product): Either<ProductError, UUID> {
+        return Either.fromRight(UUID.randomUUID())
+    }
 }
