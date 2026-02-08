@@ -30,6 +30,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     ksp("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data")
     implementation("io.micronaut.data:micronaut-data-hibernate-reactive")
     implementation("io.vertx:vertx-pg-client")
 

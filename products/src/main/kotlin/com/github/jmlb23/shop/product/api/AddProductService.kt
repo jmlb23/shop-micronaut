@@ -8,10 +8,12 @@ import com.github.jmlb23.shop.product.domain.Product
 import io.micronaut.serde.annotation.Serdeable
 import java.util.UUID
 import java.util.Date
+import jakarta.inject.Singleton
 
 @Serdeable
 data class CreateProductDTO(val name: String, val description: String, val price: Double)
 
+@Singleton
 class AddProductSerive(val repo: ProductRepository) : Service<CreateProductDTO, ProductError, UUID> {
     override suspend fun execute(param: CreateProductDTO): Either<ProductError, UUID> {
         return repo.add(Product(

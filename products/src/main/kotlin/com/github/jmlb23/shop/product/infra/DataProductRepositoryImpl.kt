@@ -44,7 +44,8 @@ interface ProductRepositoryImp :
                 product.description,
                 product.price,
                 Timestamp.valueOf(
-                    LocalDateTime.ofInstant(product.createdAt.toInstant(), ZoneId.systemDefault())
+                    LocalDateTime.ofInstant(product.createdAt.toInstant(), 
+                    ZoneId.systemDefault())
                 )
                 )
             )
