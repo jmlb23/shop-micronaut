@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.toList
 import kotlin.runCatching
 
 @Repository
-interface ProductRepositoryImp :
+abstract class ProductRepositoryImp :
     ProductRepository, CoroutineCrudRepository<JPAProduct, UUID> {
 
     override suspend fun get(id: UUID): Either<ProductError, Product> {

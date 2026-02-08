@@ -7,8 +7,9 @@ import com.github.jmlb23.shop.product.domain.ProductRepository
 import jakarta.inject.Singleton
 import java.util.Date
 import java.util.UUID
+import io.micronaut.data.annotation.Repository
 
-class InMemoryProductRepositoryImp : ProductRepository {
+open class InMemoryProductRepositoryImp : ProductRepository {
     override suspend fun get(id: UUID): Either<ProductError, Product> {
         return Either.Right(Product(id, "Example", "a description", 2.3, Date()))
     }
