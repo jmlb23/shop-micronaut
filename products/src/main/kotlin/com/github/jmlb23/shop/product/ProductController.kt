@@ -28,7 +28,6 @@ class ProductController(
     @Inject val addProduct: Service<CreateProductDTO, ProductError, UUID>,
 ) {
 
-    @Secured(SecurityRule.IS_ANONYMOUS)
     @Get("/")
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun index(): HttpResponse<List<ProductDTO>> {
