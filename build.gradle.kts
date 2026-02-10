@@ -5,6 +5,16 @@
  * Learn more about Gradle by exploring our Samples at https://docs.gradle.org/9.3.0/samples
  * This project uses @Incubating APIs which are subject to change.
  */
+plugins {
+    id("org.jetbrains.kotlin.jvm") version "1.9.25" apply false
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.25" apply false
+    id("com.google.devtools.ksp") version "1.9.25-1.0.20" apply false
+    id("io.micronaut.library") version "4.6.1" apply false
+    id("io.micronaut.application") version "4.6.1" apply false
+    id("com.gradleup.shadow") version "8.3.9" apply false
+    id("io.micronaut.aot") version "4.6.1" apply false
+}
+
 buildscript {
     repositories {
         mavenCentral()
