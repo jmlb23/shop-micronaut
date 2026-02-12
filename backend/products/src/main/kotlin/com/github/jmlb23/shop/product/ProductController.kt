@@ -34,7 +34,7 @@ class ProductController(
         return getAllProductsService
                 .execute(Unit)
                 .fold({
-                    HttpResponse.serverError()
+                    HttpResponse.status(500, it.toString())
                 },{
                     HttpResponse.ok(it)
                 })

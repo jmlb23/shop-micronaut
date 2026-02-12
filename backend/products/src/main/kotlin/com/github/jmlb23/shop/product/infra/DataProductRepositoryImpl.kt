@@ -26,13 +26,13 @@ abstract class ProductRepositoryImp :
     override suspend fun all(): Either<ProductError, List<Product>> {
         return runCatching{
             findAll()
-        }.getOrNull()?.let{
+        }.fold({
             Either.fromRight(
                 it.toList().map{
                     Product(it.id, it.name, it.description, it.price, it.createdAt)
                 }
             )
-        } ?: Either.fromLeft(ProductError.NotFoundError)
+        }, { Either.fromLeft(ProductError.UnknownError(it)) })
     }
 
     override suspend fun add(product: Product): Either<ProductError, UUID> {
