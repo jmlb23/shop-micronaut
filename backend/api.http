@@ -1,0 +1,9 @@
+@base=https://localhost:8080
+
+POST {{base}}/user/login
+Content-Type: application/json
+
+{
+    "username": "jmlb23",
+    "password": "def456.."
+}
