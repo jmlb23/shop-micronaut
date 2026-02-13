@@ -28,9 +28,10 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    ksp("io.micronaut.data:micronaut-data-processor")
+
     implementation("io.micronaut.data:micronaut-data-hibernate-reactive")
     implementation("io.vertx:vertx-pg-client")
+    ksp("io.micronaut.data:micronaut-data-processor")
 
     ksp("io.micronaut.security:micronaut-security-annotations")
     implementation("io.micronaut.security:micronaut-security-jwt")
