@@ -59,7 +59,7 @@ class ProductController(
         return addProduct
                 .execute(prod)
                 .fold({
-                    HttpResponse.unprocessableEntity()
+                    HttpResponse.status(500, it.toString())
                 }, {
                     HttpResponse.ok(it)
                 }) 

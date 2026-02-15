@@ -32,7 +32,9 @@ abstract class ProductRepositoryImp :
                     Product(it.id, it.name, it.description, it.price, it.createdAt)
                 }
             )
-        }, { Either.fromLeft(ProductError.UnknownError(it)) })
+        }, { 
+            Either.fromLeft(ProductError.UnknownError(it)) 
+        })
     }
 
     override suspend fun add(product: Product): Either<ProductError, UUID> {
@@ -49,8 +51,10 @@ abstract class ProductRepositoryImp :
                 )
                 )
             )
-        }.getOrNull()?.let { 
+        }.fold({ 
             Either.fromRight(it.id)
-        } ?: Either.fromLeft(ProductError.CreationError)
+        }, {
+            Either.fromLeft(ProductError.CreationError(it))
+        })
     }
 }
