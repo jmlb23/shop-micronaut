@@ -1,9 +1,35 @@
-@base=https://localhost:8080
+@base=http://localhost:8080
 
+# User Login
+# @name login
 POST {{base}}/user/login
 Content-Type: application/json
+Accept: application/json
 
 {
     "username": "jmlb23",
     "password": "def456.."
+}
+
+###
+# Get Products
+
+GET {{base}}/product
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}
+
+
+###
+# Add Product
+
+POST  {{base}}/product
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}
+
+{
+    "name": "New Product",
+    "description": "This is a new product.",
+    "price": 19.99
 }
