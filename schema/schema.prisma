@@ -11,3 +11,9 @@ model Product {
   price       Decimal
   @@map("product")
 }
+
+model User {
+  id          String @id @db.Uuid
+  username    String
+  hash_pass    String
+}
