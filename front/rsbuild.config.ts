@@ -4,11 +4,6 @@ import { pluginSolid } from '@rsbuild/plugin-solid';
 
 // Docs: https://rsbuild.rs/config/
 export default defineConfig({
-  source: {
-    entry: {
-      main: "./src/main.tsx"
-    }
-  },
   plugins: [
     pluginBabel({
       include: /\.(?:jsx|tsx)$/,
