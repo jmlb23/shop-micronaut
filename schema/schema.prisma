@@ -15,5 +15,6 @@ model Product {
 model User {
   id          String @id @db.Uuid
   username    String
-  hash_pass    String
+  hash_pass   String
+  @@map("user")
 }
