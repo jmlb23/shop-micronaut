@@ -13,6 +13,7 @@
     "test:watch": "rstest --watch"
   },
   "dependencies": {
+    "@solidjs/router": "^0.15.4",
     "solid-js": "^1.9.10"
   },
   "devDependencies": {
