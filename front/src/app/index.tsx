@@ -1,9 +1,10 @@
-import { Router, Route } from "@solidjs/router"
-import { type ParentProps } from "solid-js"
+import { Router, Route, type RouteSectionProps } from "@solidjs/router"
 import { CreateProduct } from "../features/product/create-product";
 import { ProductList } from "../features/product/product-list";
+import { LoginPage } from "../pages/Login";
+import { SignUpPage } from "../pages/SingUp";
 
-const Layout = (props: ParentProps) => {
+const Layout = (props: RouteSectionProps) => {
   return (
     <>
       <header>header</header>
@@ -15,10 +16,14 @@ const Layout = (props: ParentProps) => {
 
 const App = () => {
   return (
-    <Router root={Layout}>
-        <Route path="/" component={() => <h1>main</h1>} />
-        <Route path="/add-product" component={CreateProduct} />
-        <Route path="/list-product" component={ProductList} />
+    <Router>
+        <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignUpPage} />
+        <Route path="/" component={Layout} >
+            <Route path="/" component={() => <h1>main</h1>} />
+            <Route path="/add-product" component={CreateProduct} />
+            <Route path="/list-product" component={ProductList} />
+        </Route>
     </Router>
   )
 }
