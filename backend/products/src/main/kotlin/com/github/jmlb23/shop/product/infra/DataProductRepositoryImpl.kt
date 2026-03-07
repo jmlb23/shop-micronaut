@@ -57,4 +57,14 @@ abstract class ProductRepositoryImp :
             Either.fromLeft(ProductError.CreationError(it))
         })
     }
+
+    override suspend fun delete(id: UUID): Either<ProductError, UUID> {
+        return runCatching{
+            deleteById(id)
+        }.fold({
+            Either.fromRight(id)
+        }, { 
+            Either.fromLeft(ProductError.UnknownError(it))
+        })
+    }
 }

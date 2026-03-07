@@ -24,4 +24,7 @@ open class InMemoryProductRepositoryImp : ProductRepository {
     override suspend fun add(product: Product): Either<ProductError, UUID> {
         return Either.fromRight(UUID.randomUUID())
     }
+    override suspend fun delete(id: UUID): Either<ProductError, UUID> {
+        return Either.fromRight(id)
+    }
 }

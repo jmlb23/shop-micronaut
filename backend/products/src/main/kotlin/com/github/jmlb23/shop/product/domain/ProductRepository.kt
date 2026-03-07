@@ -7,4 +7,5 @@ interface ProductRepository {
     suspend fun get(id: UUID): Either<ProductError,Product>
     suspend fun all(): Either<ProductError, List<Product>>
     suspend fun add(product: Product): Either<ProductError, UUID>
+    suspend fun delete(id: UUID): Either<ProductError, UUID>
 }

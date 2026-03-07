@@ -14,6 +14,7 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Produces
 import io.micronaut.http.annotation.Status
+import io.micronaut.http.annotation.Delete
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
 import jakarta.inject.Inject
@@ -26,6 +27,7 @@ class ProductController(
     @Inject val getProductByIdService: Service<UUID, ProductError, GetProductByIdResponse>,
     @Inject val getAllProductsService: Service<Unit, ProductError, List<ProductDTO>>,
     @Inject val addProduct: Service<CreateProductDTO, ProductError, UUID>,
+    @Inject val deleteProduct: Service<UUID, ProductError, UUID>,
 ) {
 
     @Get("/")
@@ -55,13 +57,24 @@ class ProductController(
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Status(HttpStatus.CREATED)
-    suspend fun addProducts(@Body prod: CreateProductDTO): HttpResponse<Any> {
+    suspend fun addProducts(@Body prod: CreateProductDTO): HttpResponse<UUID> {
         return addProduct
                 .execute(prod)
                 .fold({
                     HttpResponse.status(500, it.toString())
                 }, {
-                    HttpResponse.ok(it)
+                    HttpResponse.created(it)
                 }) 
+    }
+
+    @Delete("/{id}")
+    suspend fun deleteProduct(id: UUID): HttpResponse<Nothing> {
+        return deleteProduct
+            .execute(id)
+            .fold({
+                HttpResponse.status(500, it.toString())
+            }, { 
+                HttpResponse.noContent()
+            })
     }
 }
