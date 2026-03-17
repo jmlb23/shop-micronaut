@@ -1,12 +1,28 @@
 package com.github.jmlb23.blog.application
 
+import io.micronaut.openapi.annotation.OpenAPIInclude
 import io.micronaut.runtime.Micronaut
 import io.micronaut.runtime.Micronaut.run
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
+import io.swagger.v3.oas.annotations.security.SecurityScheme
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 
+
+@OpenAPIInclude(
+    classes = [
+        com.github.jmlb23.shop.product.ProductController::class,
+        com.github.jmlb23.shop.auth.AuthController::class
+    ]
+)
+@SecurityScheme(
+    name = "BearerAuth",
+    type = SecuritySchemeType.HTTP,
+    scheme = "bearer",
+    bearerFormat = "JWT"
+)
 @OpenAPIDefinition(
    info = Info(
        title = "Shop API",

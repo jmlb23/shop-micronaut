@@ -17,12 +17,14 @@ import io.micronaut.http.annotation.Status
 import io.micronaut.http.annotation.Delete
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import jakarta.inject.Inject
 import java.util.Date
 import java.util.UUID
 
 @Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/product")
+@SecurityRequirement(name = "BearerAuth")
 class ProductController(
     @Inject val getProductByIdService: Service<UUID, ProductError, GetProductByIdResponse>,
     @Inject val getAllProductsService: Service<Unit, ProductError, List<ProductDTO>>,
