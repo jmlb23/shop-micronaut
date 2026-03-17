@@ -5,6 +5,7 @@ plugins {
     id("io.micronaut.application")
     id("com.gradleup.shadow")
     id("io.micronaut.aot")
+    id("io.micronaut.openapi")
 
 }
 
@@ -18,6 +19,8 @@ dependencies {
     implementation(project(":auth"))
     ksp("io.micronaut:micronaut-http-validation")
     ksp("io.micronaut.serde:micronaut-serde-processor")
+    ksp("io.micronaut.openapi:micronaut-openapi")
+    implementation("io.micronaut.openapi:micronaut-openapi-annotations")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
@@ -30,7 +33,7 @@ dependencies {
 }
 
 application {
-    mainClass = "com.github.jmlb23.blog.application.ApplicationKt"
+    mainClass = "com.github.jmlb23.blog.application.Application"
 }
 
 java {
