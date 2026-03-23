@@ -4,6 +4,7 @@ import com.github.jmlb23.shop.Either
 import com.github.jmlb23.shop.product.domain.Product
 import com.github.jmlb23.shop.product.domain.ProductError
 import com.github.jmlb23.shop.product.domain.ProductRepository
+import com.github.jmlb23.shop.product.domain.ProductUpdate
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.repository.kotlin.CoroutineCrudRepository
 import java.util.*
@@ -65,6 +66,29 @@ abstract class ProductRepositoryImp :
             Either.fromRight(id)
         }, { 
             Either.fromLeft(ProductError.UnknownError(it))
+        })
+    }
+
+    override suspend fun update(payload: ProductUpdate): Either<ProductError, UUID> {
+        return runCatching { 
+            val entity = findById(payload.id)
+            entity?.let { 
+                update(
+                    it.copy(
+                        name=payload.name ?: it.name,
+                        description=payload.description ?: it.description,
+                        price=payload.price ?: it.price
+                    )
+                )
+            }
+        }.fold({
+            it?.let { 
+                Either.fromRight(
+                    it.id
+                )
+            } ?: Either.fromLeft(ProductError.NotFoundError)
+        }, {
+            Either.fromLeft(ProductError.UpdateError(it))
         })
     }
 }

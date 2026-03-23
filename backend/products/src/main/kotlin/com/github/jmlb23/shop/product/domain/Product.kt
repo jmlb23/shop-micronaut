@@ -10,3 +10,10 @@ data class Product(
     val price: Double,
     val createdAt: Date,
 )
+
+data class ProductUpdate(
+    val id: UUID,
+    val name: String?,
+    val description: String?,
+    val price: Double?,
+)

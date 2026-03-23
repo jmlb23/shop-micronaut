@@ -11,7 +11,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "product", schema="public")
-class JPAProduct(
+data class JPAProduct(
     @field:Id
     var id: UUID = UUID.randomUUID(),
     var name: String = "",

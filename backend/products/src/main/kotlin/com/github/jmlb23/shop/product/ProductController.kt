@@ -15,6 +15,7 @@ import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Produces
 import io.micronaut.http.annotation.Status
 import io.micronaut.http.annotation.Delete
+import io.micronaut.http.annotation.Put
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
@@ -30,6 +31,7 @@ class ProductController(
     @Inject val getAllProductsService: Service<Unit, ProductError, List<ProductDTO>>,
     @Inject val addProduct: Service<CreateProductDTO, ProductError, UUID>,
     @Inject val deleteProduct: Service<UUID, ProductError, UUID>,
+    @Inject val updateProductByIdService: Service<UpdateProductByIdSerive.Request, ProductError, UUID>,
 ) {
 
     @Get("/")
@@ -76,6 +78,17 @@ class ProductController(
             .fold({
                 HttpResponse.status(500, it.toString())
             }, { 
+                HttpResponse.noContent()
+            })
+    }
+
+    @Put("/{id}")
+    suspend fun updateProduct(id: UUID, @Body request: UpdateProductByIdSerive.ProductUpdatePayload): HttpResponse<Nothing> {
+        return updateProductByIdService
+            .execute(UpdateProductByIdSerive.Request(id, request))
+            .fold({
+                HttpResponse.status(500, it.toString())
+            }, {
                 HttpResponse.noContent()
             })
     }

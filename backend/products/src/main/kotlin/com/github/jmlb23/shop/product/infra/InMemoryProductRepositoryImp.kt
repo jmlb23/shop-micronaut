@@ -4,6 +4,7 @@ import com.github.jmlb23.shop.Either
 import com.github.jmlb23.shop.product.domain.Product
 import com.github.jmlb23.shop.product.domain.ProductError
 import com.github.jmlb23.shop.product.domain.ProductRepository
+import com.github.jmlb23.shop.product.domain.ProductUpdate
 import jakarta.inject.Singleton
 import java.util.Date
 import java.util.UUID
@@ -27,4 +28,6 @@ open class InMemoryProductRepositoryImp : ProductRepository {
     override suspend fun delete(id: UUID): Either<ProductError, UUID> {
         return Either.fromRight(id)
     }
+    override suspend fun update(payload: ProductUpdate): Either<ProductError, UUID> =
+        Either.fromRight(payload.id)
 }
