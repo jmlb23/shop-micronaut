@@ -17,12 +17,17 @@ import jakarta.inject.Singleton
 class UpdateProductByIdSerive(
     val repo: ProductRepository
 ) : Service<UpdateProductByIdSerive.Request, ProductError, UUID> {
+
     data class ProductUpdatePayload(
         val description: String?,
         val name: String?,
         val price: BigDecimal
     )
-    data class Request(val idToUpdate: UUID, val payload: ProductUpdatePayload)
+
+    data class Request(
+        val idToUpdate: UUID,
+        val payload: ProductUpdatePayload
+    )
 
     override suspend fun execute(param: Request): Either<ProductError, UUID> =
         repo.update(
@@ -33,5 +38,4 @@ class UpdateProductByIdSerive(
                 param.payload.price.toDouble()
             )
         )
-    }
 }
