@@ -36,7 +36,7 @@ class ProductController(
 
     @Get("/")
     @Produces(MediaType.APPLICATION_JSON)
-    suspend fun index(): HttpResponse<List<ProductDTO>> {
+    suspend fun listProducts(): HttpResponse<List<ProductDTO>> {
         return getAllProductsService
                 .execute(Unit)
                 .fold({
