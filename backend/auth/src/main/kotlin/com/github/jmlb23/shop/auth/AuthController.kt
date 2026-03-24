@@ -15,11 +15,13 @@ import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
 import io.micronaut.security.token.generator.TokenGenerator
 import io.micronaut.security.authentication.Authentication
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.inject.Inject
 import java.time.Instant
 import java.time.Duration
 
 @Controller("/user")
+@Tag(name = "Auth", description = "Auth related operations")
 class AuthController(
     @Inject val userService: Service<Request, AuthDomainError, String>,
     @Inject val tokenGenerator: TokenGenerator

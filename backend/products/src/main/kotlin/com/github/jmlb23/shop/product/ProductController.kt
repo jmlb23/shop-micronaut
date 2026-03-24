@@ -19,6 +19,7 @@ import io.micronaut.http.annotation.Put
 import io.micronaut.security.annotation.Secured
 import io.micronaut.security.rules.SecurityRule
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.inject.Inject
 import java.util.Date
 import java.util.UUID
@@ -26,6 +27,7 @@ import java.util.UUID
 @Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/product")
 @SecurityRequirement(name = "BearerAuth")
+@Tag(name = "Products", description = "Product catalog operations")
 class ProductController(
     @Inject val getProductByIdService: Service<UUID, ProductError, GetProductByIdResponse>,
     @Inject val getAllProductsService: Service<Unit, ProductError, List<ProductDTO>>,
