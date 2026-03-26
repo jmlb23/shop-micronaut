@@ -10,6 +10,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "1.9.25" apply false
     id("com.google.devtools.ksp") version "1.9.25-1.0.20" apply false
     id("io.micronaut.library") version "4.6.1" apply false
+    id("io.micronaut.test-resources") version "4.6.1" apply false
     id("io.micronaut.application") version "4.6.1" apply false
     id("com.gradleup.shadow") version "8.3.9" apply false
     id("io.micronaut.aot") version "4.6.1" apply false

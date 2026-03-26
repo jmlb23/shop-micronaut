@@ -6,7 +6,7 @@ plugins {
     id("com.gradleup.shadow")
     id("io.micronaut.aot")
     id("io.micronaut.openapi")
-
+    id("io.micronaut.test-resources")
 }
 
 
@@ -30,6 +30,10 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("io.micronaut.sql:micronaut-hibernate-reactive")
+    implementation("io.vertx:vertx-pg-client")
+    
+    developmentOnly("io.micronaut.testresources:micronaut-test-resources-client")
 }
 
 application {
