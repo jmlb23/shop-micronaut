@@ -5,6 +5,7 @@ import com.github.jmlb23.shop.product.domain.Product
 import com.github.jmlb23.shop.product.domain.ProductError
 import com.github.jmlb23.shop.product.domain.ProductRepository
 import com.github.jmlb23.shop.product.domain.ProductUpdate
+import io.micronaut.context.annotation.Requires
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.repository.kotlin.CoroutineCrudRepository
 import java.util.*
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.toList
 import kotlin.runCatching
 
 @Repository
+@Requires(env = ["prod"])
 abstract class ProductRepositoryImp :
     ProductRepository, CoroutineCrudRepository<JPAProduct, UUID> {
 
