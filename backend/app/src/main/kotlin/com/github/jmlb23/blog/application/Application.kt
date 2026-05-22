@@ -14,7 +14,8 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 @OpenAPIInclude(
     classes = [
         com.github.jmlb23.shop.product.ProductController::class,
-        com.github.jmlb23.shop.auth.AuthController::class
+        com.github.jmlb23.shop.auth.AuthController::class,
+        com.github.jmlb23.shop.cart.CartController::class
     ]
 )
 @SecurityScheme(
@@ -28,7 +29,10 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
        title = "Shop API",
        version = "1.0.0",
        description = "shop api",
-       license = License(name = "GPLv3", url = "https://www.gnu.org/licenses/gpl-3.0.en.html#license-text"),
+       license = License(
+           name = "GPLv3",
+           url = "https://www.gnu.org/licenses/gpl-3.0.en.html#license-text"
+       ),
    )
 )
 object Application {

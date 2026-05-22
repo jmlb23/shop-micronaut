@@ -17,6 +17,7 @@ val kotlinVersion=project.properties.get("kotlinVersion")
 dependencies {
     implementation(project(":products"))
     implementation(project(":auth"))
+    implementation(project(":cart"))
     ksp("io.micronaut:micronaut-http-validation")
     ksp("io.micronaut.serde:micronaut-serde-processor")
     ksp("io.micronaut.openapi:micronaut-openapi")
