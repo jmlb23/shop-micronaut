@@ -36,10 +36,7 @@ class AuthController(
             .execute(request)
             .fold(
                 {
-                    when (it) {
-                        AuthDomainError.CredentialsError -> HttpResponse.unauthorized()
-                        else -> HttpResponse.unauthorized()
-                    }
+                    HttpResponse.unauthorized()
                 },
                 {
                     HttpResponse.ok(
