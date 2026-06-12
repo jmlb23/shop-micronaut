@@ -38,7 +38,7 @@ class AuthController(
                 {
                     when (it) {
                         AuthDomainError.CredentialsError -> HttpResponse.unauthorized()
-                        else -> HttpResponse.notFound()
+                        else -> HttpResponse.unauthorized()
                     }
                 },
                 {
