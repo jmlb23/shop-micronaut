@@ -1,0 +1,21 @@
+/* src/reset.css */
+:root {
+    --padding: 0.5rem;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+body, #root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction:column;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+

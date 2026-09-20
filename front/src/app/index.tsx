@@ -3,6 +3,7 @@ import { CreateProduct } from "../features/product/create-product";
 import { ProductList } from "../features/product/product-list";
 import { LoginPage } from "../pages/Login";
 import { SignUpPage } from "../pages/SingUp";
+import { MetaProvider} from "@solidjs/meta";
 
 const Layout = (props: RouteSectionProps) => {
   return (
@@ -16,15 +17,17 @@ const Layout = (props: RouteSectionProps) => {
 
 const App = () => {
   return (
-    <Router>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" component={SignUpPage} />
-        <Route path="/" component={Layout} >
-            <Route path="/" component={() => <h1>main</h1>} />
-            <Route path="/add-product" component={CreateProduct} />
-            <Route path="/list-product" component={ProductList} />
-        </Route>
-    </Router>
+    <MetaProvider>
+        <Router>
+            <Route path="/login" component={LoginPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <Route path="/" component={Layout} >
+                <Route path="/" component={() => <h1>main</h1>} />
+                <Route path="/add-product" component={CreateProduct} />
+                <Route path="/list-product" component={ProductList} />
+            </Route>
+        </Router>
+    </MetaProvider>
   )
 }
 
